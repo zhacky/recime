@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "d7f0c0ae-638f-4fcd-a3c4-af3a29a2e28b",
+		"name": "ReciMe Trending Recipes API",
+		"description": "Java application using the Spring framework to facilitate showing a list of trending recipes and ability to filter those recipes by difficulty.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30343367"
+	},
+	"item": [
+		{
+			"name": "api/recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Getting 200 OK Response', ()=> pm.response.to.have.status(200));",
+							"pm.test(\"Response Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Each recipe object has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    ",
+							"    responseData.forEach(function(recipe) {",
+							"        pm.expect(recipe).to.have.property('id');",
+							"        pm.expect(recipe).to.have.property('name');",
+							"        pm.expect(recipe).to.have.property('imageUrl');",
+							"        pm.expect(recipe).to.have.property('difficulty');",
+							"        pm.expect(recipe).to.have.property('position');",
+							"        pm.expect(recipe).to.have.property('version');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Id is a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(recipe) {",
+							"        pm.expect(recipe.id).to.be.a('number').and.to.satisfy((id) => id >= 0, \"Id must be a non-negative integer\");",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Difficulty is a valid string value\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(recipe) {",
+							"    pm.expect(recipe.difficulty).to.be.a('string');",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the response array is not empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recipes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/recipes/{difficulty}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Getting 200 OK Response', ()=> pm.response.to.have.status(200));",
+							"pm.test(\"Response Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Name is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(recipe) {",
+							"        pm.expect(recipe.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Difficulty is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  responseData.forEach(function(recipe) {",
+							"    pm.expect(recipe.difficulty).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"ImageUrl is a valid URL\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(recipe) {",
+							"        pm.expect(recipe.imageUrl).to.match(/^https?:\\/\\/(?:www\\.)?.+\\..+/);",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recipes/{{difficulty}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"recipes",
+						"{{difficulty}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/recipes?difficulty=",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Getting 200 OK Response', ()=> pm.response.to.have.status(200));",
+							"",
+							"pm.test(\"Name is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(recipe) {",
+							"        pm.expect(recipe.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recipes?difficulty=easy",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"recipes"
+					],
+					"query": [
+						{
+							"key": "difficulty",
+							"value": "easy"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

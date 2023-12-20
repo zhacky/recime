@@ -1,0 +1,46 @@
+{
+  "recipeList": [
+    {
+      "id": 1,
+      "name": "Chicken Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Easy",
+      "position": 1
+    },
+    {
+      "id": 2,
+      "name": "Beef Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Easy",
+      "position": 2
+    },
+    {
+      "id": 3,
+      "name": "Vegan Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Medium",
+      "position": 3
+    },
+    {
+      "id": 4,
+      "name": "Breakfast Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Medium",
+      "position": 4
+    },
+    {
+      "id": 5,
+      "name": "Shrimp Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Hard",
+      "position": 5
+    },
+    {
+      "id": 6,
+      "name": "Tuna Burger",
+      "imageUrl": "https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg",
+      "difficulty": "Hard",
+      "position": 6
+    }
+  ]
+}
